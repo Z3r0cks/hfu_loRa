@@ -1,0 +1,1 @@
+Hochschulpräsentation über das Thema LoRa
