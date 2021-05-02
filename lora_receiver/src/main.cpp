@@ -22,7 +22,7 @@ void setup() {
   //915E6 for North America
   while (!LoRa.begin(866E6)) {
     Serial.println(".");
-    delay(500);
+    delay(200);
   }
    // Change sync word (0xF3) to match the receiver
   // The sync word assures you don't get LoRa messages from other LoRa transceivers
@@ -36,7 +36,7 @@ void loop() {
   int packetSize = LoRa.parsePacket();
   if (packetSize) {
     // received a packet
-    Serial.print("Received packet '");
+    Serial.print("Received packet: ");
 
     // read packet
     while (LoRa.available()) {
@@ -45,7 +45,7 @@ void loop() {
     }
 
     // print RSSI of packet
-    Serial.print("' with RSSI ");
-    Serial.println(LoRa.packetRssi());
+    // Serial.print("' with RSSI ");
+    // Serial.println(LoRa.packetRssi());
   }
 }

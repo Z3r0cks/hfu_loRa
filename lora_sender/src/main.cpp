@@ -1,6 +1,7 @@
 
 #include <SPI.h>
 #include <LoRa.h>
+#include <wifi_connection.h>
 
 //define the pins used by the transceiver module
 #define ss 5
@@ -14,6 +15,10 @@ void setup() {
   Serial.begin(115200);
   while (!Serial);
   Serial.println("LoRa Sender");
+
+  //initialize Wifi connection
+  initWifi();
+  checkWifi();
 
   //setup LoRa transceiver module
   LoRa.setPins(ss, rst, dio0);
@@ -36,14 +41,13 @@ void setup() {
 void loop() {
   Serial.print("Sending packet: ");
   Serial.println(counter);
-
+  String currenTimeStamp = timeStampRequest();
   //Send LoRa packet to receiver
   LoRa.beginPacket();
-  LoRa.print("hello ");
-  LoRa.print(counter);
+  LoRa.print(currenTimeStamp);
   LoRa.endPacket();
 
   counter++;
 
-  delay(10000);
+  delay(2000);
 }
